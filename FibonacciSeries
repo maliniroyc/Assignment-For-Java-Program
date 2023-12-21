@@ -1,0 +1,27 @@
+package package3;
+
+public class FibonacciSeries {
+
+	public static void main(String[] args) {
+        int n = 10; // Number of Fibonacci numbers to generate
+        printFibonacciSeries(n);
+    }
+
+    public static void printFibonacciSeries(int n) {
+        int first = 0, second = 1;
+
+        System.out.print("Fibonacci Series (first " + n + " numbers): ");
+        System.out.print(first + ", " + second);
+
+        for (int i = 2; i < n; i++) {
+            int next = first + second;
+            System.out.print(", " + next);
+
+            // Update values for the next iteration
+            first = second;
+            second = next;
+        }
+
+        System.out.println(); // Move to the next line after printing the series
+    }
+}
