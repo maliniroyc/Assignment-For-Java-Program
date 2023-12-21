@@ -1,0 +1,71 @@
+package package3;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+class StackUsingQueues {
+    private Queue<Integer> mainQueue;
+    private Queue<Integer> tempQueue;
+
+    public StackUsingQueues() {
+        mainQueue = new LinkedList<>();
+        tempQueue = new LinkedList<>();
+    }
+
+    // Push element onto the stack
+    public void push(int x) {
+        // Move all elements from mainQueue to tempQueue
+        while (!mainQueue.isEmpty()) {
+            tempQueue.offer(mainQueue.poll());
+        }
+
+        // Add the new element to mainQueue
+        mainQueue.offer(x);
+
+        // Move elements back from tempQueue to mainQueue
+        while (!tempQueue.isEmpty()) {
+            mainQueue.offer(tempQueue.poll());
+        }
+    }
+
+    // Removes the element on the top of the stack
+    public void pop() {
+        if (!mainQueue.isEmpty()) {
+            mainQueue.poll();
+        } else {
+            System.out.println("Stack is empty. Cannot perform pop operation.");
+        }
+    }
+
+    // Returns the element on the top of the stack
+    public int top() {
+        if (!mainQueue.isEmpty()) {
+            return mainQueue.peek();
+        } else {
+            System.out.println("Stack is empty. Cannot perform top operation.");
+            return -1; // indicating an empty stack
+        }
+    }
+
+    // Returns true if the stack is empty
+    public boolean isEmpty() {
+        return mainQueue.isEmpty();
+    }
+
+    public static void main(String[] args) {
+        StackUsingQueues stack = new StackUsingQueues();
+
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+
+        System.out.println("Top element: " + stack.top()); // Output: 3
+
+        stack.pop();
+        System.out.println("Top element after pop: " + stack.top()); // Output: 2
+
+        stack.pop();
+        stack.pop();
+        System.out.println("Is the stack empty? " + stack.isEmpty()); // Output: true
+    }
+}
